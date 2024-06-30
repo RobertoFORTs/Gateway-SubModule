@@ -7,9 +7,11 @@ import { map } from 'rxjs/operators';
 export class ClimateService {
   constructor(private readonly httpService: HttpService) {}
 
-  getAllClimateData(): Observable<any> {
+  getAllClimateData(paginateOptions): Observable<any> {
     return this.httpService
-      .get('http://localhost:3000/climate?page=1&take=2')
+      .get(
+        `localhost:3000/climate?page=${paginateOptions.page}&take=${paginateOptions.take}`,
+      )
       .pipe(map((response) => response.data));
   }
 

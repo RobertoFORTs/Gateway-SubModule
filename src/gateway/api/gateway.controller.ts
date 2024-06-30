@@ -23,6 +23,7 @@ import { BadRequestResponse } from '../exceptions/bad-request';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { UserResponseDto } from '../dtos/response-user.dto';
 import { PageOptionsDto } from '../dtos/paginate-options.dto';
+import { ClimateResponseDto } from '../dtos/response-climate.dto';
 @Controller('gateway')
 @ApiTags('gateway')
 export class ApiGatewayController {
@@ -32,12 +33,21 @@ export class ApiGatewayController {
   ) {}
 
   @Get('/climate')
+  @ApiPaginatedResponse(ClimateResponseDto)
   @ApiOperation({ summary: 'Get all climate data' })
-  getAllClimateData(): Observable<any> {
-    return this.climateService.getAllClimateData();
+  getAllClimateData(@Query() paginateOptions: PageOptionsDto): Observable<any> {
+    return this.climateService.getAllClimateData(paginateOptions);
   }
 
   @Post('/climate')
+  @ApiCreatedResponse({
+    description: 'Created Succesfully',
+  })
+  @ApiBadRequestResponse({
+    status: 400,
+    description: 'Bad Request',
+    type: BadRequestResponse,
+  })
   @ApiOperation({ summary: 'Get localization climate data' })
   @ApiBody({ type: Object })
   getLocalizationClimate(@Body() data: any): Observable<any> {
