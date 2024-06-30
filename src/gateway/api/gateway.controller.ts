@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Delete, Body, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Body,
+  Param,
+  Query,
+} from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { NewsletterService } from '../services/newsletter.service';
 import { ClimateService } from '../services/climate.service';
@@ -31,7 +39,7 @@ export class ApiGatewayController {
 
   @Post('/climate')
   @ApiOperation({ summary: 'Get localization climate data' })
-  @ApiBody({ type: Object }) // Adjust the type as per your service's expected input
+  @ApiBody({ type: Object })
   getLocalizationClimate(@Body() data: any): Observable<any> {
     return this.climateService.getLocalizationClimate(data);
   }
@@ -39,7 +47,7 @@ export class ApiGatewayController {
   @Post('/user')
   @ApiCreatedResponse({
     description: 'Created Succesfully',
-    type: CreateUserDto, // Ensure to import and use CreateUserDto here
+    type: CreateUserDto,
   })
   @ApiBadRequestResponse({
     status: 400,
