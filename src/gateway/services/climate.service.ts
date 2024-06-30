@@ -10,7 +10,7 @@ export class ClimateService {
   getAllClimateData(paginateOptions): Observable<any> {
     return this.httpService
       .get(
-        `localhost:3000/climate?page=${paginateOptions.page}&take=${paginateOptions.take}`,
+        `localhost:3001/climate?page=${paginateOptions.page}&take=${paginateOptions.take}`,
       )
       .pipe(map((response) => response.data));
   }
@@ -23,7 +23,7 @@ export class ClimateService {
       zip: data.zip,
     };
     return this.httpService
-      .post('http://localhost:3000/climate', requestBody)
+      .post('http://localhost:3001/climate', requestBody)
       .pipe(map((response) => response));
   }
 }
