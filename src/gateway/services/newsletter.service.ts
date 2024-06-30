@@ -14,21 +14,21 @@ export class NewsletterService {
       frequency: data.frequency,
     };
     return this.httpService
-      .post('localhost:3000/user', requestBody)
+      .post('localhost:5000/user', requestBody)
       .pipe(map((response) => response.data));
   }
 
   getUser(paginateOptions): Observable<any> {
     return this.httpService
       .get(
-        `localhost:3000/user?page=${paginateOptions.page}&take=${paginateOptions.take}`,
+        `localhost:5000/user?page=${paginateOptions.page}&take=${paginateOptions.take}`,
       )
       .pipe(map((response) => response.data));
   }
 
   deleteUser(id: string): Observable<any> {
     return this.httpService
-      .delete(`localhost:3000/user/${id}`)
+      .delete(`localhost:5000/user/${id}`)
       .pipe(map((response) => response.data));
   }
 }
