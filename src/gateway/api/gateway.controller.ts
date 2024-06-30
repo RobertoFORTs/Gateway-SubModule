@@ -16,7 +16,6 @@ import {
   ApiBadRequestResponse,
   ApiOperation,
   ApiNoContentResponse,
-  ApiBody,
 } from '@nestjs/swagger';
 import { ApiPaginatedResponse } from '../../decorators/paginate.decorator';
 import { BadRequestResponse } from '../exceptions/bad-request';
@@ -24,6 +23,7 @@ import { CreateUserDto } from '../dtos/create-user.dto';
 import { UserResponseDto } from '../dtos/response-user.dto';
 import { PageOptionsDto } from '../dtos/paginate-options.dto';
 import { ClimateResponseDto } from '../dtos/response-climate.dto';
+import { CreateClimateDto } from '../dtos/create-climate.dto';
 @Controller('gateway')
 @ApiTags('gateway')
 export class ApiGatewayController {
@@ -42,6 +42,7 @@ export class ApiGatewayController {
   @Post('/climate')
   @ApiCreatedResponse({
     description: 'Created Succesfully',
+    type: ClimateResponseDto,
   })
   @ApiBadRequestResponse({
     status: 400,
@@ -49,8 +50,7 @@ export class ApiGatewayController {
     type: BadRequestResponse,
   })
   @ApiOperation({ summary: 'Get localization climate data' })
-  @ApiBody({ type: Object })
-  getLocalizationClimate(@Body() data: any): Observable<any> {
+  getLocalizationClimate(@Body() data: CreateClimateDto): Observable<any> {
     return this.climateService.getLocalizationClimate(data);
   }
 
