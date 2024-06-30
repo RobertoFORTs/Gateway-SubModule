@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
-import { ClimateService } from './climate.service';
-import { NewsletterService } from './newsletter.service';
+import { ClimateService } from './services/climate.service';
+import { NewsletterService } from './services/newsletter.service';
 
 @Module({
   imports: [HttpModule],
