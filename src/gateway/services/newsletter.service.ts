@@ -18,9 +18,11 @@ export class NewsletterService {
       .pipe(map((response) => response.data));
   }
 
-  getUser(): Observable<any> {
+  getUser(paginateOptions): Observable<any> {
     return this.httpService
-      .get('localhost:3000/user?page=1&take=2')
+      .get(
+        `localhost:3000/user?page=${paginateOptions.page}&take=${paginateOptions.take}`,
+      )
       .pipe(map((response) => response.data));
   }
 
